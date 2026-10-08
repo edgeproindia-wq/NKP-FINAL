@@ -4,7 +4,6 @@ const API_URL = "https://nkp-final.onrender.com";
 const registerForm =
     document.getElementById("registerForm");
 
-
 const fullNameInput =
     document.getElementById("fullName");
 
@@ -43,48 +42,28 @@ const toggleConfirmPassword =
     );
 
 
-
-/* =========================
-   SHOW MESSAGE
-========================= */
-
 function showMessage(message, type) {
 
-    messageBox.textContent =
-        message;
+    messageBox.textContent = message;
 
     messageBox.className =
         "register-message " + type;
-
 }
 
-
-
-/* =========================
-   CLEAR MESSAGE
-========================= */
 
 function clearMessage() {
 
-    messageBox.textContent =
-        "";
+    messageBox.textContent = "";
 
     messageBox.className =
         "register-message";
-
 }
 
-
-
-/* =========================
-   LOADING
-========================= */
 
 function setLoading(isLoading) {
 
     registerButton.disabled =
         isLoading;
-
 
     if (isLoading) {
 
@@ -97,14 +76,8 @@ function setLoading(isLoading) {
             "Create Account";
 
     }
-
 }
 
-
-
-/* =========================
-   PASSWORD VISIBILITY
-========================= */
 
 function togglePasswordVisibility(
     input,
@@ -113,29 +86,19 @@ function togglePasswordVisibility(
 
     if (input.type === "password") {
 
-        input.type =
-            "text";
+        input.type = "text";
 
-        button.textContent =
-            "🙈";
+        button.textContent = "🙈";
 
     } else {
 
-        input.type =
-            "password";
+        input.type = "password";
 
-        button.textContent =
-            "👁";
+        button.textContent = "👁";
 
     }
-
 }
 
-
-
-/* =========================
-   PASSWORD TOGGLE
-========================= */
 
 togglePassword.addEventListener(
     "click",
@@ -163,11 +126,6 @@ toggleConfirmPassword.addEventListener(
 );
 
 
-
-/* =========================
-   PHONE VALIDATION
-========================= */
-
 phoneInput.addEventListener(
     "input",
     function () {
@@ -177,7 +135,6 @@ phoneInput.addEventListener(
                 /\D/g,
                 ""
             );
-
 
         if (this.value.length > 10) {
 
@@ -193,25 +150,14 @@ phoneInput.addEventListener(
 );
 
 
-
-/* =========================
-   REGISTER FORM
-========================= */
-
 registerForm.addEventListener(
     "submit",
     async function (event) {
 
         event.preventDefault();
 
-
         clearMessage();
 
-
-
-        /* =========================
-           GET FORM VALUES
-        ========================= */
 
         const fullName =
             fullNameInput.value.trim();
@@ -233,11 +179,6 @@ registerForm.addEventListener(
             confirmPasswordInput.value;
 
 
-
-        /* =========================
-           VALIDATION
-        ========================= */
-
         if (
             !fullName ||
             !email ||
@@ -256,11 +197,6 @@ registerForm.addEventListener(
         }
 
 
-
-        /* =========================
-           PHONE CHECK
-        ========================= */
-
         if (phone.length !== 10) {
 
             showMessage(
@@ -273,11 +209,6 @@ registerForm.addEventListener(
         }
 
 
-
-        /* =========================
-           PASSWORD CHECK
-        ========================= */
-
         if (password.length < 6) {
 
             showMessage(
@@ -289,11 +220,6 @@ registerForm.addEventListener(
 
         }
 
-
-
-        /* =========================
-           CONFIRM PASSWORD
-        ========================= */
 
         if (
             password !==
@@ -310,11 +236,6 @@ registerForm.addEventListener(
         }
 
 
-
-        /* =========================
-           TERMS CHECK
-        ========================= */
-
         if (!termsInput.checked) {
 
             showMessage(
@@ -327,18 +248,8 @@ registerForm.addEventListener(
         }
 
 
-
-        /* =========================
-           START LOADING
-        ========================= */
-
         setLoading(true);
 
-
-
-        /* =========================
-           REGISTER API
-        ========================= */
 
         try {
 
@@ -346,7 +257,6 @@ registerForm.addEventListener(
                 await fetch(
                     `${API_URL}/api/register`,
                     {
-
                         method: "POST",
 
                         headers: {
@@ -370,20 +280,13 @@ registerForm.addEventListener(
                                     password
 
                             })
-
                     }
                 );
-
 
 
             const data =
                 await response.json();
 
-
-
-            /* =========================
-               API ERROR
-            ========================= */
 
             if (
                 !response.ok ||
@@ -403,11 +306,6 @@ registerForm.addEventListener(
             }
 
 
-
-            /* =========================
-               SUCCESS
-            ========================= */
-
             showMessage(
                 data.message ||
                 "Account created successfully!",
@@ -423,21 +321,11 @@ registerForm.addEventListener(
                 "Account Created";
 
 
-
-            /* =========================
-               STORE PHONE
-            ========================= */
-
             localStorage.setItem(
                 "nkpUserPhone",
                 phone
             );
 
-
-
-            /* =========================
-               REDIRECT TO LOGIN
-            ========================= */
 
             setTimeout(
                 function () {
