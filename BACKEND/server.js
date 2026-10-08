@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
@@ -8,26 +7,16 @@ const OpenAI = require("openai");
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
-
-/* =====================================================
-   OPENAI
-===================================================== */
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
-
-/* =====================================================
+/* =========================================================
    MIDDLEWARE
-===================================================== */
+========================================================= */
 
 app.use(cors());
 app.use(express.json());
 
-/* =====================================================
-   MYSQL CONNECTION
-===================================================== */
+/* =========================================================
+   MYSQL DATABASE - AIVEN
+========================================================= */
 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -36,37 +25,47 @@ const db = mysql.createPool({
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 3306,
 
+    ssl: {
+        rejectUnauthorized: false
+    },
+
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
 });
 
-/* =====================================================
+/* =========================================================
+   OPENAI
+========================================================= */
+
+let openai = null;
+
+if (process.env.OPENAI_API_KEY) {
+    openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY
+    });
+}
+
+/* =========================================================
    HOME
-===================================================== */
+========================================================= */
 
 app.get("/", (req, res) => {
-
     res.json({
         success: true,
-        message: "NKP Backend is running successfully!"
+        message: "NKP Backend Server is running!"
     });
-
 });
 
-/* =====================================================
+/* =========================================================
    HEALTH CHECK
-===================================================== */
+========================================================= */
 
 app.get("/api/health", async (req, res) => {
 
     try {
 
-        const connection = await db.getConnection();
-
-        await connection.ping();
-
-        connection.release();
+        const [rows] = await db.query("SELECT 1 AS test");
 
         res.json({
             success: true,
@@ -75,163 +74,100 @@ app.get("/api/health", async (req, res) => {
 
     } catch (error) {
 
-        console.error(
-            "Database Error:",
-            error.message
-        );
+        console.error("Database health error:", error);
 
         res.status(500).json({
-
             success: false,
-
-            message: "MySQL connection failed.",
-
+            message: "Database connection failed",
             error: error.message
-
         });
 
     }
 
 });
 
-/* =====================================================
+/* =========================================================
    REGISTER
-===================================================== */
+========================================================= */
 
 app.post("/api/register", async (req, res) => {
 
     try {
 
         const {
-            fullName,
-            businessName,
+            name,
             email,
             phone,
             password
         } = req.body;
 
-        if (!fullName || !email || !password) {
+        if (!name || !email || !password) {
 
             return res.status(400).json({
-
                 success: false,
-
-                message:
-                    "Please fill all required fields."
-
+                message: "Name, email and password are required."
             });
 
         }
 
-        const cleanName =
-            String(fullName).trim();
+        /* Check existing user */
 
-        const cleanEmail =
-            String(email).trim().toLowerCase();
-
-        const cleanPhone =
-            phone
-                ? String(phone).trim()
-                : null;
-
-        /* CHECK EXISTING EMAIL */
-
-        const [existingUsers] =
-            await db.execute(
-
-                "SELECT id FROM users WHERE email = ?",
-
-                [cleanEmail]
-
-            );
+        const [existingUsers] = await db.query(
+            "SELECT id FROM users WHERE email = ?",
+            [email]
+        );
 
         if (existingUsers.length > 0) {
 
             return res.status(409).json({
-
                 success: false,
-
-                message:
-                    "An account with this email already exists."
-
+                message: "Email already registered."
             });
 
         }
 
-        /* HASH PASSWORD */
+        /* Hash password */
 
         const hashedPassword =
-            await bcrypt.hash(
-                password,
-                10
-            );
+            await bcrypt.hash(password, 10);
 
-        /* INSERT USER */
+        /* Insert user */
 
-        const [result] =
-            await db.execute(
-
-                `INSERT INTO users
-                (name, email, phone, password)
-                VALUES (?, ?, ?, ?)`,
-
-                [
-                    cleanName,
-                    cleanEmail,
-                    cleanPhone,
-                    hashedPassword
-                ]
-
-            );
+        const [result] = await db.query(
+            `INSERT INTO users
+            (name, email, phone, password)
+            VALUES (?, ?, ?, ?)`,
+            [
+                name,
+                email,
+                phone || null,
+                hashedPassword
+            ]
+        );
 
         res.status(201).json({
-
             success: true,
-
-            message:
-                "Registration successful!",
-
-            user: {
-
-                id:
-                    result.insertId,
-
-                name:
-                    cleanName,
-
-                email:
-                    cleanEmail,
-
-                phone:
-                    cleanPhone
-
-            }
-
+            message: "Registration successful!",
+            userId: result.insertId
         });
 
     } catch (error) {
 
-        console.error(
-            "Registration Error:",
-            error
-        );
+        console.error("Register error:", error);
 
         res.status(500).json({
-
             success: false,
-
-            message:
-                "Registration failed. Please try again."
-
+            message: "Registration failed.",
+            error: error.message
         });
 
     }
 
 });
 
-/* =====================================================
+/* =========================================================
    LOGIN
-===================================================== */
+========================================================= */
 
 app.post("/api/login", async (req, res) => {
 
@@ -245,54 +181,38 @@ app.post("/api/login", async (req, res) => {
         if (!email || !password) {
 
             return res.status(400).json({
-
                 success: false,
-
-                message:
-                    "Please enter your email and password."
-
+                message: "Email and password are required."
             });
 
         }
 
-        const cleanEmail =
-            String(email).trim().toLowerCase();
+        /* Find user */
 
-        /* FIND USER */
-
-        const [users] =
-            await db.execute(
-
-                `SELECT
-                    id,
-                    name,
-                    email,
-                    phone,
-                    password
-                 FROM users
-                 WHERE email = ?`,
-
-                [cleanEmail]
-
-            );
+        const [users] = await db.query(
+            `SELECT
+                id,
+                name,
+                email,
+                phone,
+                password
+             FROM users
+             WHERE email = ?`,
+            [email]
+        );
 
         if (users.length === 0) {
 
             return res.status(401).json({
-
                 success: false,
-
-                message:
-                    "Invalid email or password."
-
+                message: "Invalid email or password."
             });
 
         }
 
-        const user =
-            users[0];
+        const user = users[0];
 
-        /* CHECK PASSWORD */
+        /* Compare password */
 
         const passwordMatch =
             await bcrypt.compare(
@@ -303,74 +223,45 @@ app.post("/api/login", async (req, res) => {
         if (!passwordMatch) {
 
             return res.status(401).json({
-
                 success: false,
-
-                message:
-                    "Invalid email or password."
-
+                message: "Invalid email or password."
             });
 
         }
 
-        /* LOGIN SUCCESS */
-
         res.json({
-
             success: true,
-
-            message:
-                "Login successful!",
+            message: "Login successful!",
 
             user: {
-
-                id:
-                    user.id,
-
-                name:
-                    user.name,
-
-                email:
-                    user.email,
-
-                phone:
-                    user.phone
-
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone
             }
-
         });
 
     } catch (error) {
 
-        console.error(
-            "Login Error:",
-            error
-        );
+        console.error("Login error:", error);
 
         res.status(500).json({
-
             success: false,
-
-            message:
-                "Login failed. Please try again."
-
+            message: "Login failed.",
+            error: error.message
         });
 
     }
 
 });
 
-/* =====================================================
-   🤖 NKP AI CHAT
-===================================================== */
+/* =========================================================
+   AI CHAT
+========================================================= */
 
 app.post("/api/ai-chat", async (req, res) => {
 
     try {
-
-        console.log("=================================");
-        console.log("🤖 NKP AI REQUEST RECEIVED");
-        console.log("=================================");
 
         const {
             message,
@@ -378,280 +269,92 @@ app.post("/api/ai-chat", async (req, res) => {
             scores
         } = req.body;
 
-        /* =================================================
-           VALIDATE MESSAGE
-        ================================================= */
-
-        if (
-            !message ||
-            typeof message !== "string" ||
-            !message.trim()
-        ) {
+        if (!message || !message.trim()) {
 
             return res.status(400).json({
-
                 success: false,
-
-                message:
-                    "Please enter a message."
-
+                message: "Message is required."
             });
 
         }
 
-        /* =================================================
-           CHECK API KEY
-        ================================================= */
+        /*
+         * OpenAI key இல்லையென்றால்
+         * backend crash ஆகாமல் response கொடுக்கும்.
+         */
 
-        if (!process.env.OPENAI_API_KEY) {
+        if (!openai) {
 
-            console.error(
-                "❌ OPENAI_API_KEY is missing."
-            );
-
-            return res.status(500).json({
-
-                success: false,
-
+            return res.json({
+                success: true,
                 message:
-                    "OpenAI API key is not configured on the server."
-
+                    "NKP AI service is currently using the local Business Advisor. Please continue with your business question."
             });
 
         }
-
-        console.log("✅ OpenAI API key found");
-
-        /* =================================================
-           BUSINESS DATA
-        ================================================= */
-
-        const businessData =
-            business || {};
-
-        const scoreData =
-            scores || {};
-
-        /* =================================================
-           BUSINESS CONTEXT
-        ================================================= */
 
         const businessContext = `
+You are NKP AI Business Advisor.
 
-You are NKP AI Assistant for Namma KanakkuPillai.
+Your job is to help business owners improve their business.
 
-Your job is to help small and medium business owners
-understand their business assessment and improve their
-business using practical and realistic advice.
+Business information:
+${JSON.stringify(business || {}, null, 2)}
 
-BUSINESS INFORMATION
+Assessment information:
+${JSON.stringify(scores || {}, null, 2)}
 
-Business Name:
-${businessData.businessName || "Not provided"}
-
-Business Type:
-${businessData.businessType || "Not provided"}
-
-Industry:
-${businessData.industry || "Not provided"}
-
-Years in Business:
-${businessData.yearsInBusiness || "Not provided"}
-
-Number of Employees:
-${businessData.employees || "Not provided"}
-
-Location:
-${businessData.location || "Not provided"}
-
-Average Monthly Revenue:
-${businessData.revenue || "Not provided"}
-
-Average Monthly Expenses:
-${businessData.expenses || "Not provided"}
-
-Business Description:
-${businessData.description || "Not provided"}
-
-
-BUSINESS HEALTH SCORES
-
-Financial Health:
-${scoreData.financial ?? 0}%
-
-Operations:
-${scoreData.operations ?? 0}%
-
-Customer & Market:
-${scoreData.customer ?? 0}%
-
-People & Team:
-${scoreData.people ?? 0}%
-
-Growth & Strategy:
-${scoreData.growth ?? 0}%
-
-Overall Assessment:
-${scoreData.overall ?? 0}%
-
-
-IMPORTANT INSTRUCTIONS
-
-1. Answer based on the available business information.
-
-2. Give practical business advice.
-
-3. Do not invent financial data.
-
-4. If information is missing, clearly say it is not available.
-
-5. Keep answers understandable for normal business owners.
-
-6. Avoid unnecessary technical language.
-
-7. When discussing scores, explain what the score means.
-
-8. If asked what to improve first, prioritize the weakest area.
-
-9. Give actionable steps whenever possible.
-
-10. You are an AI business assistant, not a financial,
-legal, tax, or medical professional.
-
-11. Do not claim that you performed real-world actions.
-
-12. Keep answers concise but useful.
-
-13. Use headings and bullet points when helpful.
-
+Important rules:
+- Answer the user's question directly.
+- Do not automatically show scores.
+- Do not automatically show an assessment summary.
+- Do not mention scores unless the user asks for them or they are directly necessary.
+- Give practical and simple business advice.
+- Use the business information when relevant.
+- Be professional and friendly.
+- Keep the answer easy to understand.
 `;
-
-        /* =================================================
-           OPENAI REQUEST
-        ================================================= */
-
-        console.log("🔄 Sending request to OpenAI...");
 
         const response =
             await openai.responses.create({
 
                 model: "gpt-5.5",
 
-                instructions:
-                    businessContext,
+                instructions: businessContext,
 
-                input:
-                    message.trim()
+                input: message.trim()
 
             });
-
-        /* =================================================
-           GET AI ANSWER
-        ================================================= */
 
         const answer =
-            response.output_text;
+            response.output_text ||
+            "Sorry, I could not generate a response.";
 
-        if (!answer) {
-
-            console.error(
-                "❌ OpenAI returned no output."
-            );
-
-            return res.status(500).json({
-
-                success: false,
-
-                message:
-                    "NKP AI did not return a response."
-
-            });
-
-        }
-
-        console.log("✅ NKP AI response received");
-
-        /* =================================================
-           SEND RESPONSE
-        ================================================= */
-
-        return res.json({
-
+        res.json({
             success: true,
-
-            message:
-                answer
-
+            message: answer
         });
 
     } catch (error) {
 
-        /* =================================================
-           IMPORTANT DEBUGGING
-        ================================================= */
+        console.error("AI error:", error);
 
-        console.error(
-            "================================="
-        );
-
-        console.error(
-            "❌ NKP AI ERROR"
-        );
-
-        console.error(
-            "================================="
-        );
-
-        console.error(
-            "Message:",
-            error.message
-        );
-
-        console.error(
-            "Status:",
-            error.status || "Unknown"
-        );
-
-        console.error(
-            "Code:",
-            error.code || "Unknown"
-        );
-
-        console.error(
-            "Type:",
-            error.type || "Unknown"
-        );
-
-        console.error(
-            "Full Error:",
-            error
-        );
-
-        console.error(
-            "================================="
-        );
-
-        /* =================================================
-           SEND ACTUAL ERROR TO FRONTEND
-        ================================================= */
-
-        return res.status(500).json({
-
+        res.status(500).json({
             success: false,
-
-            message:
-                error.message ||
-                "Unable to connect to NKP AI right now."
-
+            message: "AI service is currently unavailable.",
+            error: error.message
         });
 
     }
 
 });
 
-/* =====================================================
-   START SERVER
-===================================================== */
+/* =========================================================
+   SERVER START
+========================================================= */
+
+const PORT =
+    process.env.PORT || 5000;
 
 app.listen(PORT, () => {
 
@@ -659,15 +362,9 @@ app.listen(PORT, () => {
     console.log("========================================");
     console.log("🚀 NKP BACKEND SERVER");
     console.log("========================================");
-    console.log(
-        `🌐 Server: http://localhost:${PORT}`
-    );
-    console.log(
-        "🤖 AI Endpoint: /api/ai-chat"
-    );
-    console.log(
-        "🗄️ MySQL Endpoint: /api/health"
-    );
+    console.log(`🌐 Server running on port ${PORT}`);
+    console.log("🤖 AI Endpoint: /api/ai-chat");
+    console.log("🗄️ MySQL Endpoint: /api/health");
     console.log("========================================");
     console.log("");
 
