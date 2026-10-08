@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NKP AI Advisor</title>
+
+    <link rel="stylesheet" href="css/ai-insights.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-top">
+
+            <div class="brand">
+                <div class="brand-logo">NKP</div>
+
+                <div class="brand-text">
+                    <h2>NKP AI</h2>
+                    <span>Business Advisor</span>
+                </div>
+            </div>
+
+            <button class="new-chat-btn" id="newChatButton">
+                <span>＋</span>
+                <span>New chat</span>
+            </button>
+
+        </div>
+
+
+        <div class="sidebar-section">
+
+            <p class="section-title">Business Tools</p>
+
+            <button class="sidebar-btn" data-question="Analyse my business and tell me what I should focus on.">
+                <span>📊</span>
+                <span>Business Analysis</span>
+            </button>
+
+            <button class="sidebar-btn" data-question="What should be my top priority right now?">
+                <span>🎯</span>
+                <span>Priority</span>
+            </button>
+
+            <button class="sidebar-btn" data-question="How can I increase my sales and grow my business?">
+                <span>📈</span>
+                <span>Sales & Growth</span>
+            </button>
+
+            <button class="sidebar-btn" data-question="What are the major business risks I should focus on?">
+                <span>⚠️</span>
+                <span>Business Risk</span>
+            </button>
+
+            <button class="sidebar-btn" data-question="Give me a practical action plan to improve my business.">
+                <span>🚀</span>
+                <span>Action Plan</span>
+            </button>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <button class="sidebar-footer-btn" id="reportButton">
+                📄 Reports
+            </button>
+
+            <button class="sidebar-footer-btn" id="backButton">
+                🏠 Dashboard
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-container">
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button class="menu-btn" id="menuButton">
+                    ☰
+                </button>
+
+                <div>
+                    <h1>NKP AI Advisor</h1>
+                    <span>Business Intelligence Assistant</span>
+                </div>
+
+            </div>
+
+            <div class="status">
+
+                <span class="status-dot"></span>
+
+                <span>Online</span>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CHAT AREA ================= -->
+
+        <section class="chat-area" id="chatMessages">
+
+            <!-- Messages will appear here -->
+
+        </section>
+
+
+        <!-- ================= TYPING ================= -->
+
+        <div class="typing-container" id="typingIndicator">
+
+            <div class="typing-box">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= COMPOSER ================= -->
+
+        <div class="composer-wrapper">
+
+            <div class="composer">
+
+                <textarea
+                    id="chatInput"
+                    rows="1"
+                    placeholder="Message NKP AI..."
+                    autocomplete="off"
+                ></textarea>
+
+                <button id="sendButton" class="send-btn">
+
+                    <span>➤</span>
+
+                </button>
+
+            </div>
+
+            <p class="composer-note">
+                NKP AI provides business-focused guidance based on your assessment and business information.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/ai-insights.js"></script>
+
+</body>
+
+</html>

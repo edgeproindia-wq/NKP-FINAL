@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NKP | Assessment Questions</title>
+
+    <link rel="stylesheet" href="css/questions.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="top-header">
+
+        <div class="brand">
+
+            <div class="logo">
+                NKP
+            </div>
+
+            <div class="brand-text">
+                <h2>Namma KanakkuPillai</h2>
+                <span>Business Health Assessment</span>
+            </div>
+
+        </div>
+
+        <a href="subcategories.html" class="back-btn">
+            ← Back
+        </a>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <!-- PAGE HEADER -->
+        <section class="page-heading">
+
+            <span class="small-title">
+                BUSINESS HEALTH ASSESSMENT
+            </span>
+
+            <h1 id="subcategoryTitle">
+                Assessment Questions
+            </h1>
+
+            <p id="subcategoryDescription">
+                Answer each question based on your current business situation.
+            </p>
+
+        </section>
+
+
+        <!-- PROGRESS -->
+        <div class="progress-wrapper">
+
+            <div class="progress-info">
+
+                <span id="questionCounter">
+                    Question 1 of 5
+                </span>
+
+                <span id="progressPercentage">
+                    20%
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION CARD -->
+        <section class="question-card">
+
+            <div class="question-number" id="questionNumber">
+                QUESTION 01
+            </div>
+
+            <h2 id="questionText">
+                Question loading...
+            </h2>
+
+
+            <!-- OPTIONS -->
+            <div class="options-container" id="optionsContainer">
+
+                <button
+                    type="button"
+                    class="option"
+                    data-value="5"
+                >
+
+                    <span class="radio-circle"></span>
+
+                    <span class="option-text">
+                        Strongly Agree
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="option"
+                    data-value="4"
+                >
+
+                    <span class="radio-circle"></span>
+
+                    <span class="option-text">
+                        Agree
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="option"
+                    data-value="3"
+                >
+
+                    <span class="radio-circle"></span>
+
+                    <span class="option-text">
+                        Neutral
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="option"
+                    data-value="2"
+                >
+
+                    <span class="radio-circle"></span>
+
+                    <span class="option-text">
+                        Disagree
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="option"
+                    data-value="1"
+                >
+
+                    <span class="radio-circle"></span>
+
+                    <span class="option-text">
+                        Strongly Disagree
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+            <div
+                class="question-message"
+                id="questionMessage"
+            ></div>
+
+
+            <!-- NAVIGATION -->
+            <div class="navigation">
+
+                <button
+                    type="button"
+                    class="nav-btn secondary"
+                    id="previousBtn"
+                >
+                    ← Previous
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-btn primary"
+                    id="nextBtn"
+                >
+                    Next →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- INFO -->
+        <div class="assessment-note">
+
+            <span class="note-icon">💡</span>
+
+            <p>
+                There are no right or wrong answers.
+                Please answer honestly based on your current
+                business situation.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script src="js/questions.js"></script>
+
+</body>
+
+</html>

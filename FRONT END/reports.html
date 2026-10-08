@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>NKP | Business Health Report</title>
+
+<link rel="stylesheet"
+    href="css/reports.css">
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="report-header">
+
+    <div class="brand">
+
+        <div class="brand-logo">
+            NKP
+        </div>
+
+        <div>
+            <h2>
+                Namma KanakkuPillai
+            </h2>
+
+            <span>
+                Business Health Assessment
+            </span>
+        </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            id="printReport"
+            class="print-btn">
+
+            🖨️ Print Report
+
+        </button>
+
+        <button
+            id="backResults"
+            class="back-btn">
+
+            ← Results
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- MAIN -->
+
+<main class="report-container">
+
+
+    <!-- REPORT TITLE -->
+
+    <section class="report-title">
+
+        <span class="report-badge">
+            BUSINESS HEALTH REPORT
+        </span>
+
+        <h1>
+            Business Health Assessment
+        </h1>
+
+        <p>
+            A detailed overview of your business
+            assessment and performance areas.
+        </p>
+
+    </section>
+
+
+
+    <!-- BUSINESS INFORMATION -->
+
+    <section class="report-card">
+
+        <div class="section-heading">
+
+            <div class="section-icon">
+                🏢
+            </div>
+
+            <div>
+
+                <h2>
+                    Business Information
+                </h2>
+
+                <p>
+                    Your registered business details
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="business-grid">
+
+            <div class="info-item">
+
+                <span>
+                    Business Name
+                </span>
+
+                <strong id="businessName">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    Business Type
+                </span>
+
+                <strong id="businessType">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    Industry
+                </span>
+
+                <strong id="industry">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    Years in Business
+                </span>
+
+                <strong id="yearsInBusiness">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    Employees
+                </span>
+
+                <strong id="employees">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>
+                    Location
+                </span>
+
+                <strong id="location">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- OVERALL -->
+
+    <section class="overall-card">
+
+        <div>
+
+            <span class="overall-label">
+                OVERALL BUSINESS HEALTH
+            </span>
+
+            <h2 id="overallScore">
+                0%
+            </h2>
+
+            <p id="overallStatus">
+                Assessment completed
+            </p>
+
+        </div>
+
+
+        <div class="overall-circle">
+
+            <div
+                class="circle-progress"
+                id="circleProgress">
+
+                <span id="circleScore">
+                    0%
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CATEGORY SCORES -->
+
+    <section class="report-card">
+
+        <div class="section-heading">
+
+            <div class="section-icon">
+                📊
+            </div>
+
+            <div>
+
+                <h2>
+                    Category Performance
+                </h2>
+
+                <p>
+                    Assessment results across all
+                    business areas
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="categoryScores"
+            class="category-list">
+
+            <!-- JavaScript -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- INSIGHTS -->
+
+    <section class="insight-grid">
+
+
+        <div class="insight-card strong-card">
+
+            <div class="insight-icon">
+                💪
+            </div>
+
+            <div>
+
+                <span>
+                    Strong Area
+                </span>
+
+                <h3 id="strongArea">
+                    —
+                </h3>
+
+                <p id="strongDescription">
+                    —
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="insight-card attention-card">
+
+            <div class="insight-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <span>
+                    Area Needing Attention
+                </span>
+
+                <h3 id="weakArea">
+                    —
+                </h3>
+
+                <p id="weakDescription">
+                    —
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- RECOMMENDATIONS -->
+
+    <section class="report-card">
+
+        <div class="section-heading">
+
+            <div class="section-icon">
+                💡
+            </div>
+
+            <div>
+
+                <h2>
+                    Improvement Recommendations
+                </h2>
+
+                <p>
+                    Suggested areas to focus on
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="recommendations"
+            class="recommendation-list">
+
+            <!-- JavaScript -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <section class="report-footer">
+
+        <p>
+            This report is generated by
+            <strong>NKP – Namma KanakkuPillai</strong>
+            based on your Business Health Assessment.
+        </p>
+
+        <span id="reportDate">
+            —
+        </span>
+
+    </section>
+
+
+</main>
+
+
+<script src="js/reports.js"></script>
+</body>
+
+</html>

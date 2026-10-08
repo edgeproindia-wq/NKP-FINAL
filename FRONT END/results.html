@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NKP | Final Assessment</title>
+
+    <link
+        rel="stylesheet"
+        href="css/results.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="top-header">
+
+        <div class="brand">
+
+            <div class="logo">
+                NKP
+            </div>
+
+            <div class="brand-text">
+
+                <h2>
+                    Namma KanakkuPillai
+                </h2>
+
+                <span>
+                    Business Health Assessment
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="results-container">
+
+        <section class="results-card">
+
+
+            <!-- SUCCESS -->
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <p class="completed-label">
+                ASSESSMENT COMPLETED
+            </p>
+
+
+            <h1>
+                Final Business Health Assessment
+            </h1>
+
+
+            <p class="description">
+
+                Your assessment is complete.
+                Here is a summary of your business health
+                across all major areas.
+
+            </p>
+
+
+            <!-- ================= OVERALL SCORE ================= -->
+
+            <div class="overall-section">
+
+                <div class="overall-circle">
+
+                    <div class="overall-inner">
+
+                        <span
+                            id="overallScore"
+                            class="overall-number"
+                        >
+                            0%
+                        </span>
+
+                        <span class="overall-label">
+                            Overall Score
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <h2 id="overallTitle">
+                    Assessment Result
+                </h2>
+
+
+                <p id="overallMessage">
+
+                    Your overall business health
+                    assessment is ready.
+
+                </p>
+
+            </div>
+
+
+            <!-- ================= CATEGORY SCORES ================= -->
+
+            <div class="category-section">
+
+                <h2>
+                    Category Performance
+                </h2>
+
+
+                <div class="category-list">
+
+
+                    <!-- FINANCIAL -->
+
+                    <div class="category-row">
+
+                        <div class="category-info">
+
+                            <div class="category-icon">
+                                💰
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Financial Health
+                                </h3>
+
+                                <p>
+                                    Revenue, profitability,
+                                    cash flow and financial management
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            id="financialScore"
+                            class="category-score"
+                        >
+                            0%
+                        </span>
+
+                    </div>
+
+
+                    <!-- OPERATIONS -->
+
+                    <div class="category-row">
+
+                        <div class="category-info">
+
+                            <div class="category-icon">
+                                ⚙️
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Operations
+                                </h3>
+
+                                <p>
+                                    Processes, resources,
+                                    productivity and quality
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            id="operationsScore"
+                            class="category-score"
+                        >
+                            0%
+                        </span>
+
+                    </div>
+
+
+                    <!-- CUSTOMER -->
+
+                    <div class="category-row">
+
+                        <div class="category-info">
+
+                            <div class="category-icon">
+                                ❤️
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Customer & Market
+                                </h3>
+
+                                <p>
+                                    Customer satisfaction,
+                                    marketing and competition
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            id="customerScore"
+                            class="category-score"
+                        >
+                            0%
+                        </span>
+
+                    </div>
+
+
+                    <!-- PEOPLE -->
+
+                    <div class="category-row">
+
+                        <div class="category-info">
+
+                            <div class="category-icon">
+                                👥
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    People & Team
+                                </h3>
+
+                                <p>
+                                    Team management,
+                                    leadership and talent
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            id="peopleScore"
+                            class="category-score"
+                        >
+                            0%
+                        </span>
+
+                    </div>
+
+
+                    <!-- GROWTH -->
+
+                    <div class="category-row">
+
+                        <div class="category-info">
+
+                            <div class="category-icon">
+                                🚀
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Growth & Strategy
+                                </h3>
+
+                                <p>
+                                    Goals, strategy,
+                                    innovation and future readiness
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            id="growthScore"
+                            class="category-score"
+                        >
+                            0%
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ACTION ================= -->
+
+            <div class="action-section">
+
+                <button
+                    id="aiButton"
+                    class="primary-btn"
+                >
+                    🤖 View AI Suggestions →
+                </button>
+
+
+                <button
+                    id="reportButton"
+                    class="secondary-btn"
+                >
+                    📄 View Detailed Report
+                </button>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="js/results.js"></script>
+
+</body>
+
+</html>

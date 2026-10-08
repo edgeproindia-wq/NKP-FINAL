@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NKP | Category Score</title>
+
+    <link
+        rel="stylesheet"
+        href="css/category-score.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="top-header">
+
+        <div class="brand">
+
+            <div class="logo">
+                NKP
+            </div>
+
+            <div class="brand-text">
+
+                <h2>
+                    Namma KanakkuPillai
+                </h2>
+
+                <span>
+                    Business Health Assessment
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="score-container">
+
+        <section class="score-card">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <!-- LABEL -->
+
+            <p class="completed-label">
+                CATEGORY COMPLETED
+            </p>
+
+
+            <!-- CATEGORY NAME -->
+
+            <h1 id="categoryName">
+                Financial Health
+            </h1>
+
+
+            <!-- DESCRIPTION -->
+
+            <p class="description">
+
+                You have completed all the questions
+                for this business area.
+
+            </p>
+
+
+            <!-- SCORE CIRCLE -->
+
+            <div class="score-circle">
+
+                <div class="circle-inner">
+
+                    <span
+                        id="categoryScore"
+                        class="score-number"
+                    >
+                        0%
+                    </span>
+
+                    <span class="score-text">
+                        Category Score
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PERFORMANCE -->
+
+            <div class="performance-box">
+
+                <h3 id="performanceTitle">
+                    Good Performance
+                </h3>
+
+                <p id="performanceMessage">
+
+                    Your business has a good foundation
+                    in this area.
+
+                </p>
+
+            </div>
+
+
+            <!-- SUBCATEGORY SUMMARY -->
+
+            <div class="summary">
+
+                <h3>
+                    Category Assessment
+                </h3>
+
+                <div id="subcategorySummary">
+                    <!-- JavaScript will add scores here -->
+                </div>
+
+            </div>
+
+
+            <!-- CONTINUE BUTTON -->
+
+            <button
+                id="continueBtn"
+                class="continue-btn"
+            >
+
+                Continue to Next Category →
+
+            </button>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/category-score.js"></script>
+
+</body>
+
+</html>

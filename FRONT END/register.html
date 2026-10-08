@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | Namma KanakkuPillai</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body>
+
+    <main class="register-page">
+
+        <section class="register-brand">
+
+            <div class="brand-container">
+
+                <a href="index.html" class="brand">
+                    <div class="brand-logo">NKP</div>
+
+                    <div class="brand-name">
+                        NAMMA
+                        <span>KANAKKUPILLAI</span>
+                    </div>
+                </a>
+
+                <div class="brand-content">
+
+                    <div class="brand-label">
+                        AI-POWERED BUSINESS PLATFORM
+                    </div>
+
+                    <h1>
+                        Build smarter.
+                        <span>Grow stronger.</span>
+                    </h1>
+
+                    <p>
+                        Create your NKP account and start understanding
+                        your business health with intelligent assessment
+                        and AI-powered recommendations.
+                    </p>
+
+                    <div class="benefits">
+
+                        <div class="benefit">
+                            <div class="benefit-icon">✓</div>
+                            <div>
+                                <strong>Business Health Assessment</strong>
+                                <span>Understand the strengths and weaknesses of your business.</span>
+                            </div>
+                        </div>
+
+                        <div class="benefit">
+                            <div class="benefit-icon">✓</div>
+                            <div>
+                                <strong>Smart Recommendations</strong>
+                                <span>Get practical suggestions to improve your business.</span>
+                            </div>
+                        </div>
+
+                        <div class="benefit">
+                            <div class="benefit-icon">✓</div>
+                            <div>
+                                <strong>Track Your Progress</strong>
+                                <span>Monitor your business performance over time.</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="brand-footer">
+                    <span>© 2026 Namma KanakkuPillai</span>
+                    <span>Business Intelligence Platform</span>
+                </div>
+
+            </div>
+
+            <div class="background-circle circle-one"></div>
+            <div class="background-circle circle-two"></div>
+            <div class="background-grid"></div>
+
+        </section>
+
+
+        <section class="register-section">
+
+            <div class="register-card">
+
+                <div class="mobile-brand">
+
+                    <a href="index.html" class="brand">
+                        <div class="brand-logo">NKP</div>
+
+                        <div class="brand-name">
+                            NAMMA
+                            <span>KANAKKUPILLAI</span>
+                        </div>
+                    </a>
+
+                </div>
+
+
+                <div class="form-heading">
+
+                    <div class="heading-label">
+                        GET STARTED
+                    </div>
+
+                    <h2>
+                        Create your account
+                    </h2>
+
+                    <p>
+                        Join NKP and start your business health assessment.
+                    </p>
+
+                </div>
+
+
+                <form id="registerForm">
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="fullName">
+                                Full Name
+                            </label>
+
+                            <div class="input-box">
+
+                                <span class="input-icon">👤</span>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    placeholder="Enter your full name"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <div class="input-box">
+
+                                <span class="input-icon">📱</span>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="Enter phone number"
+                                    maxlength="10"
+                                    autocomplete="tel"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="businessName">
+                            Business Name
+                        </label>
+
+                        <div class="input-box">
+
+                            <span class="input-icon">🏢</span>
+
+                            <input
+                                type="text"
+                                id="businessName"
+                                name="businessName"
+                                placeholder="Enter your business name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-box">
+
+                            <span class="input-icon">✉</span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <div class="input-box">
+
+                                <span class="input-icon">🔒</span>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Create password"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="togglePassword"
+                                    aria-label="Show password"
+                                >
+                                    👁
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <div class="input-box">
+
+                                <span class="input-icon">🔐</span>
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="Confirm password"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="toggleConfirmPassword"
+                                    aria-label="Show password"
+                                >
+                                    👁
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="terms-row">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            name="terms"
+                            required
+                        >
+
+                        <span>
+                            I agree to the
+                            <a href="terms.html" target="_blank">
+                                Terms of Service
+                            </a>
+                            and
+                            <a href="privacy.html" target="_blank">
+                                Privacy Policy
+                            </a>
+                        </span>
+
+                    </label>
+
+
+                    <div
+                        id="registerMessage"
+                        class="register-message"
+                    ></div>
+
+
+                    <button
+                        type="submit"
+                        class="register-button"
+                        id="registerButton"
+                    >
+
+                        <span id="buttonText">
+                            Create Account
+                        </span>
+
+                        <span class="button-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="login-link">
+
+                    <span>Already have an account?</span>
+
+                    <a href="login.html">
+                        Sign in
+                    </a>
+
+                </div>
+
+
+                <div class="security-note">
+
+                    <span>🔒</span>
+
+                    <span>
+                        Your business information is protected
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/register.js"></script>
+
+</body>
+</html>
