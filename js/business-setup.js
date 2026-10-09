@@ -1,427 +1,173 @@
-const businessForm =
-document.getElementById("businessSetupForm");
 
-const businessMessage =
-document.getElementById("businessMessage");
+document.addEventListener("DOMContentLoaded", function () {
 
-const continueButton =
-document.getElementById("continueButton");
+    const form = document.getElementById("businessSetupForm");
+    const message = document.getElementById("businessMessage");
+    const continueButton = document.getElementById("continueButton");
+    const buttonText = document.getElementById("buttonText");
 
-const buttonText =
-document.getElementById("buttonText");
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "business-message " + type;
+    }
 
-const description =
-document.getElementById("description");
+    function resetAssessmentProgress() {
 
-/* ================================
-MESSAGE
-================================ */
+        const keysToRemove = [
+            "nkpSelectedCategory",
+            "nkpSelectedSubcategory",
+            "nkpSelectedSubcategoryIndex",
+            "nkpCategoryScores",
+            "nkpOverallScore",
+            "assessmentAnswers"
+        ];
 
-function showMessage(message, type) {
+        keysToRemove.forEach(function (key) {
+            localStorage.removeItem(key);
+        });
 
-businessMessage.textContent = message;
+        const categories = [
+            "financial",
+            "operations",
+            "customer",
+            "people",
+            "growth"
+        ];
 
-businessMessage.className =
-    "business-message " + type;
-}
+        categories.forEach(function (category) {
 
-/* ================================
-DESCRIPTION CHARACTER LIMIT
-================================ */
+            localStorage.removeItem(
+                "nkpCategoryScore_" + category
+            );
 
-description.addEventListener("input", function () {
+            localStorage.removeItem(
+                "nkpCompletedSubcategories_" + category
+            );
 
-
-if (this.value.length > 500) {
-
-    this.value =
-        this.value.substring(0, 500);
-
-}
-
-});
-
-/* ================================
-CLEAR OLD ASSESSMENT PROGRESS
-================================ */
-
-function resetAssessmentProgress() {
-
-/* Selected category/subcategory */
-
-localStorage.removeItem(
-    "nkpSelectedCategory"
-);
-
-localStorage.removeItem(
-    "nkpSelectedSubcategory"
-);
-
-localStorage.removeItem(
-    "nkpSelectedSubcategoryIndex"
-);
-
-
-/* Old category scores */
-
-localStorage.removeItem(
-    "nkpCategoryScores"
-);
-
-localStorage.removeItem(
-    "nkpOverallScore"
-);
-
-
-/* Old assessment answers */
-
-localStorage.removeItem(
-    "assessmentAnswers"
-);
-
-
-/* Category progress */
-
-const categories = [
-    "financial",
-    "operations",
-    "customer",
-    "people",
-    "growth"
-];
-
-
-categories.forEach(function (category) {
-
-    localStorage.removeItem(
-        "nkpCategoryScore_" + category
-    );
-
-    localStorage.removeItem(
-        "nkpCompletedSubcategories_" + category
-    );
-
-});
-
-
-/* All 25 subcategory answer sets */
-
-const subcategories = {
-
-    financial: [
-        "Revenue & Sales",
-        "Profitability",
-        "Cash Flow",
-        "Financial Management",
-        "Financial Risk"
-    ],
-
-    operations: [
-        "Business Processes",
-        "Resource Management",
-        "Productivity",
-        "Quality Management",
-        "Process Improvement"
-    ],
-
-    customer: [
-        "Customer Satisfaction",
-        "Target Market",
-        "Marketing",
-        "Competition",
-        "Customer Retention"
-    ],
-
-    people: [
-        "Team Management",
-        "Skills & Training",
-        "Employee Engagement",
-        "Leadership",
-        "Talent Development"
-    ],
-
-    growth: [
-        "Business Goals",
-        "Strategic Planning",
-        "Innovation",
-        "Growth Opportunities",
-        "Future Readiness"
-    ]
-
-};
-
-
-Object.keys(subcategories).forEach(
-    function (category) {
-
-        subcategories[category].forEach(
-            function (subcategory) {
-
+            for (let i = 1; i <= 5; i++) {
                 localStorage.removeItem(
-                    "nkpAnswers_" +
-                    category +
-                    "_" +
-                    subcategory
+                    "nkpAnswers_" + category + "_" + i
                 );
-
             }
-        );
-
-    }
-);
-
-
-console.log(
-    "NKP: Old assessment progress cleared."
-);
-
-}
-
-/* ================================
-FORM SUBMIT
-================================ */
-
-businessForm.addEventListener(
-"submit",
-function (event) {
-
-    event.preventDefault();
-
-
-    businessMessage.textContent = "";
-
-    businessMessage.className =
-        "business-message";
-
-
-    /* ================================
-       GET VALUES
-    ================================ */
-
-    const businessName =
-        document.getElementById(
-            "businessName"
-        ).value.trim();
-
-    const businessType =
-        document.getElementById(
-            "businessType"
-        ).value;
-
-    const industry =
-        document.getElementById(
-            "industry"
-        ).value;
-
-    const yearsInBusiness =
-        document.getElementById(
-            "yearsInBusiness"
-        ).value;
-
-    const employees =
-        document.getElementById(
-            "employees"
-        ).value;
-
-    const location =
-        document.getElementById(
-            "location"
-        ).value.trim();
-
-    const monthlyRevenue =
-        document.getElementById(
-            "monthlyRevenue"
-        ).value;
-
-    const monthlyExpenses =
-        document.getElementById(
-            "monthlyExpenses"
-        ).value;
-
-    const businessDescription =
-        document.getElementById(
-            "description"
-        ).value.trim();
-
-
-    /* ================================
-       VALIDATION
-    ================================ */
-
-    if (!businessName) {
-
-        showMessage(
-            "Please enter your business name.",
-            "error"
-        );
-
-        return;
+        });
     }
 
+    form.addEventListener("submit", function (event) {
 
-    if (!businessType) {
+        event.preventDefault();
 
-        showMessage(
-            "Please select your business type.",
-            "error"
-        );
+        const businessName =
+            document.getElementById("businessName").value.trim();
 
-        return;
-    }
+        const businessType =
+            document.getElementById("businessType").value;
 
+        const industry =
+            document.getElementById("industry").value;
 
-    if (!industry) {
+        const yearsInBusiness =
+            document.getElementById("yearsInBusiness").value;
 
-        showMessage(
-            "Please select your industry.",
-            "error"
-        );
+        const employees =
+            document.getElementById("employees").value;
 
-        return;
-    }
+        const street =
+            document.getElementById("street").value.trim();
 
+        const city =
+            document.getElementById("city").value.trim();
 
-    if (
-        yearsInBusiness === "" ||
-        Number(yearsInBusiness) < 0
-    ) {
+        const state =
+            document.getElementById("state").value.trim();
 
-        showMessage(
-            "Please enter valid years in business.",
-            "error"
-        );
+        const monthlyRevenue =
+            document.getElementById("monthlyRevenue").value;
 
-        return;
-    }
+        const monthlyExpenses =
+            document.getElementById("monthlyExpenses").value;
 
+        if (
+            !businessName ||
+            !businessType ||
+            !industry ||
+            yearsInBusiness === "" ||
+            employees === "" ||
+            !street ||
+            !city ||
+            !state ||
+            monthlyRevenue === "" ||
+            monthlyExpenses === ""
+        ) {
+            showMessage(
+                "Please fill in all required fields.",
+                "error"
+            );
+            return;
+        }
 
-    if (
-        employees === "" ||
-        Number(employees) < 1
-    ) {
+        if (
+            Number(yearsInBusiness) < 0 ||
+            Number(yearsInBusiness) > 100 ||
+            Number(employees) < 1 ||
+            Number(monthlyRevenue) < 0 ||
+            Number(monthlyExpenses) < 0
+        ) {
+            showMessage(
+                "Please enter valid business and financial information.",
+                "error"
+            );
+            return;
+        }
 
-        showMessage(
-            "Please enter the number of employees.",
-            "error"
-        );
+        const businessData = {
+            businessName: businessName,
+            businessType: businessType,
+            industry: industry,
+            yearsInBusiness: Number(yearsInBusiness),
+            employees: Number(employees),
+            street: street,
+            city: city,
+            state: state,
+            location: [street, city, state].join(", "),
+            monthlyRevenue: Number(monthlyRevenue),
+            monthlyExpenses: Number(monthlyExpenses)
+        };
 
-        return;
-    }
+        try {
 
+            localStorage.setItem(
+                "nkpBusiness",
+                JSON.stringify(businessData)
+            );
 
-    if (!location) {
+            resetAssessmentProgress();
 
-        showMessage(
-            "Please enter your business location.",
-            "error"
-        );
+            continueButton.disabled = true;
+            buttonText.textContent = "Saving...";
 
-        return;
-    }
+            showMessage(
+                "Business information saved successfully!",
+                "success"
+            );
 
+            setTimeout(function () {
+                window.location.href = "categories.html";
+            }, 700);
 
-    if (
-        monthlyRevenue === "" ||
-        Number(monthlyRevenue) < 0
-    ) {
+        } catch (error) {
 
-        showMessage(
-            "Please enter your monthly revenue.",
-            "error"
-        );
+            console.error("Business Setup Error:", error);
 
-        return;
-    }
+            continueButton.disabled = false;
+            buttonText.textContent = "Continue to Assessment";
 
+            showMessage(
+                "Unable to save business information. Please try again.",
+                "error"
+            );
 
-    if (
-        monthlyExpenses === "" ||
-        Number(monthlyExpenses) < 0
-    ) {
+        }
 
-        showMessage(
-            "Please enter your monthly expenses.",
-            "error"
-        );
+    });
 
-        return;
-    }
-
-
-    /* ================================
-       SAVE BUSINESS DATA
-    ================================ */
-
-    const businessData = {
-
-        businessName: businessName,
-
-        businessType: businessType,
-
-        industry: industry,
-
-        yearsInBusiness:
-            Number(yearsInBusiness),
-
-        employees:
-            Number(employees),
-
-        location: location,
-
-        monthlyRevenue:
-            Number(monthlyRevenue),
-
-        monthlyExpenses:
-            Number(monthlyExpenses),
-
-        description:
-            businessDescription
-
-    };
-
-
-    localStorage.setItem(
-        "nkpBusiness",
-        JSON.stringify(businessData)
-    );
-
-
-    /* ================================
-       RESET OLD ASSESSMENT
-    ================================ */
-
-    resetAssessmentProgress();
-
-
-    /* ================================
-       BUTTON LOADING
-    ================================ */
-
-    continueButton.disabled = true;
-
-    buttonText.textContent =
-        "Saving...";
-
-
-    setTimeout(function () {
-
-        showMessage(
-            "Business information saved successfully!",
-            "success"
-        );
-
-
-        buttonText.textContent =
-            "Continue to Assessment ✓";
-
-
-        setTimeout(function () {
-
-            window.location.href =
-                "categories.html";
-
-        }, 800);
-
-    }, 500);
-}
-);
+});

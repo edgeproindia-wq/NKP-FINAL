@@ -1,6 +1,6 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,483 +12,152 @@
 
 <body>
 
-    <!-- HEADER -->
-
     <header class="top-header">
-
-        <a href="index.html" class="brand">
+        <a href="categories.html" class="brand">
             <span class="brand-logo">NKP</span>
             <span class="brand-name">Namma KanakkuPillai</span>
         </a>
-
-        <div class="header-right">
-            <span class="setup-text">Business Setup</span>
-
-            <a href="login.html" class="logout-link">
-                Sign Out
-            </a>
-        </div>
-
     </header>
 
-
-    <!-- MAIN -->
-
-    <main class="setup-page">
-
-        <section class="setup-container">
-
-
-            <!-- PAGE INTRO -->
-
-            <div class="setup-intro">
-
-                <div class="intro-badge">
-                    BUSINESS PROFILE
-                </div>
-
-                <h1>
-                    Tell us about your
-                    <span>business</span>
-                </h1>
-
-                <p>
-                    Provide a few details about your business.
-                    This information helps NKP create a more
-                    meaningful Business Health Assessment for you.
-                </p>
-
-            </div>
-
-
-            <!-- PROGRESS -->
-
-            <div class="progress-wrapper">
-
-                <div class="progress-step active">
-
-                    <div class="step-circle">
-                        1
-                    </div>
-
-                    <span>Business Setup</span>
-
-                </div>
-
-
-                <div class="progress-line"></div>
-
-
-                <div class="progress-step">
-
-                    <div class="step-circle">
-                        2
-                    </div>
-
-                    <span>Assessment</span>
-
-                </div>
-
-
-                <div class="progress-line"></div>
-
-
-                <div class="progress-step">
-
-                    <div class="step-circle">
-                        3
-                    </div>
-
-                    <span>Results</span>
-
-                </div>
-
-            </div>
-
-
-            <!-- FORM CARD -->
-
-            <div class="form-card">
-
-                <div class="card-header">
-
-                    <div>
-                        <h2>Business Information</h2>
-
-                        <p>
-                            Enter accurate information for a better assessment.
-                        </p>
-                    </div>
-
-                    <div class="required-note">
-                        * Required
-                    </div>
-
-                </div>
-
-
-                <form id="businessSetupForm">
-
-
-                    <!-- BUSINESS NAME -->
-
-                    <div class="form-section">
-
-                        <h3>Basic Information</h3>
-
-                        <div class="form-grid">
-
-                            <div class="form-group full-width">
-
-                                <label for="businessName">
-                                    Business Name
-                                    <span>*</span>
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="businessName"
-                                    name="businessName"
-                                    placeholder="Enter your business name"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="businessType">
-                                    Business Type
-                                    <span>*</span>
-                                </label>
-
-                                <select
-                                    id="businessType"
-                                    name="businessType"
-                                    required
-                                >
-
-                                    <option value="">
-                                        Select business type
-                                    </option>
-
-                                    <option value="sole-proprietorship">
-                                        Sole Proprietorship
-                                    </option>
-
-                                    <option value="partnership">
-                                        Partnership
-                                    </option>
-
-                                    <option value="private-limited">
-                                        Private Limited Company
-                                    </option>
-
-                                    <option value="llp">
-                                        LLP
-                                    </option>
-
-                                    <option value="other">
-                                        Other
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="industry">
-                                    Industry
-                                    <span>*</span>
-                                </label>
-
-                                <select
-                                    id="industry"
-                                    name="industry"
-                                    required
-                                >
-
-                                    <option value="">
-                                        Select industry
-                                    </option>
-
-                                    <option value="retail">
-                                        Retail
-                                    </option>
-
-                                    <option value="manufacturing">
-                                        Manufacturing
-                                    </option>
-
-                                    <option value="technology">
-                                        Technology
-                                    </option>
-
-                                    <option value="food">
-                                        Food & Beverage
-                                    </option>
-
-                                    <option value="agriculture">
-                                        Agriculture
-                                    </option>
-
-                                    <option value="services">
-                                        Professional Services
-                                    </option>
-
-                                    <option value="healthcare">
-                                        Healthcare
-                                    </option>
-
-                                    <option value="education">
-                                        Education
-                                    </option>
-
-                                    <option value="logistics">
-                                        Logistics & Transportation
-                                    </option>
-
-                                    <option value="other">
-                                        Other
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="yearsInBusiness">
-                                    Years in Business
-                                    <span>*</span>
-                                </label>
-
-                                <input
-                                    type="number"
-                                    id="yearsInBusiness"
-                                    name="yearsInBusiness"
-                                    min="0"
-                                    max="100"
-                                    placeholder="e.g. 5"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="employees">
-                                    Number of Employees
-                                    <span>*</span>
-                                </label>
-
-                                <input
-                                    type="number"
-                                    id="employees"
-                                    name="employees"
-                                    min="1"
-                                    placeholder="e.g. 10"
-                                    required
-                                >
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- LOCATION -->
-
-                    <div class="form-section">
-
-                        <h3>Business Location</h3>
-
-                        <div class="form-grid">
-
-                            <div class="form-group full-width">
-
-                                <label for="location">
-                                    Location
-                                    <span>*</span>
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="location"
-                                    name="location"
-                                    placeholder="City, State"
-                                    required
-                                >
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- FINANCIAL -->
-
-                    <div class="form-section">
-
-                        <h3>Financial Information</h3>
-
-                        <div class="form-grid">
-
-                            <div class="form-group">
-
-                                <label for="monthlyRevenue">
-                                    Average Monthly Revenue
-                                    <span>*</span>
-                                </label>
-
-                                <div class="input-with-symbol">
-
-                                    <span>₹</span>
-
-                                    <input
-                                        type="number"
-                                        id="monthlyRevenue"
-                                        name="monthlyRevenue"
-                                        min="0"
-                                        placeholder="e.g. 100000"
-                                        required
-                                    >
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="monthlyExpenses">
-                                    Average Monthly Expenses
-                                    <span>*</span>
-                                </label>
-
-                                <div class="input-with-symbol">
-
-                                    <span>₹</span>
-
-                                    <input
-                                        type="number"
-                                        id="monthlyExpenses"
-                                        name="monthlyExpenses"
-                                        min="0"
-                                        placeholder="e.g. 70000"
-                                        required
-                                    >
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- DESCRIPTION -->
-
-                    <div class="form-section">
-
-                        <h3>About Your Business</h3>
-
-                        <div class="form-group full-width">
-
-                            <label for="description">
-                                Business Description
-                            </label>
-
-                            <textarea
-                                id="description"
-                                name="description"
-                                rows="5"
-                                maxlength="500"
-                                placeholder="Briefly describe your business, products or services..."
-                            ></textarea>
-
-                            <div class="character-count">
-                                Maximum 500 characters
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- MESSAGE -->
-
-                    <div
-                        id="businessMessage"
-                        class="business-message">
-                    </div>
-
-
-                    <!-- ACTIONS -->
-
-                    <div class="form-actions">
-
-                        <a
-                            href="login.html"
-                            class="back-button"
-                        >
-                            ← Back
-                        </a>
-
-
-                        <button
-                            type="submit"
-                            class="continue-button"
-                            id="continueButton"
-                        >
-
-                            <span id="buttonText">
-                                Continue to Assessment
-                            </span>
-
-                            <span class="button-arrow">
-                                →
-                            </span>
-
-                        </button>
-
-                    </div>
-
-
-                </form>
-
-            </div>
-
-
-            <!-- FOOTER NOTE -->
-
-            <div class="security-note">
-
-                <span class="security-icon">🔒</span>
-
-                <span>
-                    Your business information is kept secure
-                    and is used only for your assessment.
-                </span>
-
-            </div>
-
-
+    <main class="page-container">
+
+        <section class="page-heading">
+            <h1>Set Up Your Business</h1>
+            <p>Tell us about your business to begin your health assessment.</p>
         </section>
 
-    </main>
+        <form id="businessSetupForm">
 
+            <!-- Basic Information -->
+            <section class="form-section">
+                <h2>Basic Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+                        <label for="businessName">Business Name <span>*</span></label>
+                        <input type="text" id="businessName"
+                               name="businessName"
+                               placeholder="Enter your business name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="businessType">Business Type <span>*</span></label>
+                        <select id="businessType" name="businessType" required>
+                            <option value="">Select business type</option>
+                            <option value="sole-proprietorship">Sole Proprietorship</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="private-limited">Private Limited Company</option>
+                            <option value="llp">LLP</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="industry">Industry <span>*</span></label>
+                        <select id="industry" name="industry" required>
+                            <option value="">Select industry</option>
+                            <option value="retail">Retail</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="technology">Technology / IT</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="dairy">Dairy / Food</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="services">Professional Services</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yearsInBusiness">Years in Business <span>*</span></label>
+                        <input type="number" id="yearsInBusiness"
+                               name="yearsInBusiness"
+                               min="0" max="100"
+                               placeholder="e.g. 5" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employees">Number of Employees <span>*</span></label>
+                        <input type="number" id="employees"
+                               name="employees"
+                               min="1"
+                               placeholder="e.g. 10" required>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Business Location -->
+            <section class="form-section">
+                <h2>Business Location</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+                        <label for="street">Street Address <span>*</span></label>
+                        <input type="text" id="street" name="street"
+                               placeholder="Enter street name and address" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City <span>*</span></label>
+                        <input type="text" id="city" name="city"
+                               placeholder="Enter city" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">State <span>*</span></label>
+                        <input type="text" id="state" name="state"
+                               placeholder="Enter state" required>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Financial Information -->
+            <section class="form-section">
+                <h2>Financial Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="monthlyRevenue">Average Monthly Revenue (₹) <span>*</span></label>
+                        <input type="number" id="monthlyRevenue"
+                               name="monthlyRevenue"
+                               min="0" step="0.01"
+                               placeholder="e.g. 100000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="monthlyExpenses">Average Monthly Expenses (₹) <span>*</span></label>
+                        <input type="number" id="monthlyExpenses"
+                               name="monthlyExpenses"
+                               min="0" step="0.01"
+                               placeholder="e.g. 70000" required>
+                    </div>
+
+                </div>
+            </section>
+
+            <div id="businessMessage" class="business-message"
+                 role="status" aria-live="polite"></div>
+
+            <div class="form-actions">
+                <a href="login.html" class="back-button">← Back</a>
+
+                <button type="submit" class="continue-button"
+                        id="continueButton">
+                    <span id="buttonText">Continue to Assessment</span>
+                    <span class="button-arrow">→</span>
+                </button>
+            </div>
+
+        </form>
+
+    </main>
 
     <script src="js/business-setup.js"></script>
 
 </body>
-
 </html>
