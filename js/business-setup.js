@@ -129,8 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
             city: city,
             state: state,
             location: [street, city, state].join(", "),
-            monthlyRevenue: Number(monthlyRevenue),
-            monthlyExpenses: Number(monthlyExpenses)
         };
 
         try {
