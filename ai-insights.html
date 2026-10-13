@@ -1,175 +1,336 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NKP AI Advisor</title>
+    <title>AI Business Insights | NKP</title>
+
+    <meta name="description"
+          content="NKP AI-powered Business Health Insights and personalized business improvement reports.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="css/ai-insights.css">
+
+    <script src="js/ai-insights.js" defer></script>
 </head>
 
 <body>
 
-    <!-- ================= SIDEBAR ================= -->
+<div class="app-layout">
 
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-top">
+        <div class="brand-section">
+            <div class="brand-logo">NKP</div>
 
-            <div class="brand">
-                <div class="brand-logo">NKP</div>
-
-                <div class="brand-text">
-                    <h2>NKP AI</h2>
-                    <span>Business Advisor</span>
-                </div>
+            <div class="brand-text">
+                <h2>NKP Insights</h2>
+                <p>Business Intelligence</p>
             </div>
-
-            <button class="new-chat-btn" id="newChatButton">
-                <span>＋</span>
-                <span>New chat</span>
-            </button>
-
         </div>
 
+        <div class="sidebar-label">WORKSPACE</div>
 
-        <div class="sidebar-section">
+        <button type="button"
+                class="sidebar-btn active"
+                id="homeButton"
+                data-question="Give me a summary of my business health assessment and the most important areas to improve.">
+            <span class="nav-icon">⌂</span>
+            <span>AI Insights</span>
+        </button>
 
-            <p class="section-title">Business Tools</p>
+        <button type="button"
+                class="sidebar-btn"
+                data-question="Analyze my financial growth and explain practical ways to improve profitability.">
+            <span class="nav-icon">₹</span>
+            <span>Financial Analysis</span>
+        </button>
 
-            <button class="sidebar-btn" data-question="Analyse my business and tell me what I should focus on.">
-                <span>📊</span>
-                <span>Business Analysis</span>
-            </button>
+        <button type="button"
+                class="sidebar-btn"
+                data-question="Analyze my operational efficiency and give me practical improvements.">
+            <span class="nav-icon">⚙</span>
+            <span>Operations</span>
+        </button>
 
-            <button class="sidebar-btn" data-question="What should be my top priority right now?">
-                <span>🎯</span>
-                <span>Priority</span>
-            </button>
+        <button type="button"
+                class="sidebar-btn"
+                data-question="Analyze my market position, customer satisfaction and competitiveness.">
+            <span class="nav-icon">↗</span>
+            <span>Market & Customers</span>
+        </button>
 
-            <button class="sidebar-btn" data-question="How can I increase my sales and grow my business?">
-                <span>📈</span>
-                <span>Sales & Growth</span>
-            </button>
+        <button type="button"
+                class="sidebar-btn"
+                data-question="Analyze my business risks, compliance and sustainability using my available assessment data.">
+            <span class="nav-icon">◇</span>
+            <span>Risk & Growth</span>
+        </button>
 
-            <button class="sidebar-btn" data-question="What are the major business risks I should focus on?">
-                <span>⚠️</span>
-                <span>Business Risk</span>
-            </button>
+        <div class="sidebar-divider"></div>
 
-            <button class="sidebar-btn" data-question="Give me a practical action plan to improve my business.">
-                <span>🚀</span>
-                <span>Action Plan</span>
-            </button>
+        <div class="sidebar-label">TOOLS</div>
 
+        <button type="button" class="sidebar-btn" id="newChatButton">
+            <span class="nav-icon">＋</span>
+            <span>New Conversation</span>
+        </button>
+
+        <button type="button" class="sidebar-btn" id="reportButton">
+            <span class="nav-icon">▤</span>
+            <span>Generate AI Report</span>
+        </button>
+
+        <div class="sidebar-spacer"></div>
+
+        <div class="sidebar-footer">
+            <div class="status-dot"></div>
+
+            <div>
+                <strong>NKP AI Assistant</strong>
+                <p>Business Health Support</p>
+            </div>
         </div>
 
-
-        <div class="sidebar-bottom">
-
-            <button class="sidebar-footer-btn" id="reportButton">
-                📄 Reports
-            </button>
-
-            <button class="sidebar-footer-btn" id="backButton">
-                🏠 Dashboard
-            </button>
-
-        </div>
+        <button type="button" class="sidebar-btn back-btn" id="backButton">
+            <span class="nav-icon">←</span>
+            <span>Back to Dashboard</span>
+        </button>
 
     </aside>
 
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
 
-    <!-- ================= MAIN ================= -->
-
-    <main class="main-container">
-
-        <!-- HEADER -->
-
+        <!-- TOP HEADER -->
         <header class="top-header">
 
             <div class="header-left">
-
-                <button class="menu-btn" id="menuButton">
+                <button type="button"
+                        id="menuButton"
+                        class="icon-button"
+                        aria-label="Toggle sidebar"
+                        aria-controls="sidebar"
+                        aria-expanded="true">
                     ☰
                 </button>
 
                 <div>
-                    <h1>NKP AI Advisor</h1>
-                    <span>Business Intelligence Assistant</span>
+                    <div class="breadcrumb">Workspace / AI Insights</div>
+                    <h1>AI Business Insights</h1>
+                    <p class="header-subtitle">
+                        Your intelligent partner for smarter business decisions.
+                    </p>
                 </div>
-
             </div>
 
-            <div class="status">
+            <div class="header-right">
+                <div class="ai-status">
+                    <span class="status-dot"></span>
+                    <span>AI Assistant</span>
+                </div>
 
-                <span class="status-dot"></span>
-
-                <span>Online</span>
-
+                <div class="user-avatar" aria-label="Business owner">B</div>
             </div>
 
         </header>
 
+        <!-- WELCOME BANNER -->
+        <section class="welcome-banner">
 
-        <!-- ================= CHAT AREA ================= -->
+            <div class="welcome-content">
+                <span class="eyebrow">YOUR BUSINESS, BETTER</span>
 
-        <section class="chat-area" id="chatMessages">
+                <h2>Make your next business decision with confidence.</h2>
 
-            <!-- Messages will appear here -->
+                <p>
+                    Ask questions about your assessment, understand business
+                    challenges, and create an actionable business health report.
+                </p>
+
+                <div class="welcome-points">
+                    <span>✓ Personalized guidance</span>
+                    <span>✓ Practical action plans</span>
+                    <span>✓ AI-generated reports</span>
+                </div>
+            </div>
+
+            <div class="welcome-illustration" aria-hidden="true">
+                <div class="illustration-orbit orbit-one"></div>
+                <div class="illustration-orbit orbit-two"></div>
+                <div class="illustration-center">
+                    <span>NKP</span>
+                    <small>AI</small>
+                </div>
+                <div class="floating-card card-one">↗ Growth</div>
+                <div class="floating-card card-two">✦ Insights</div>
+                <div class="floating-card card-three">✓ Action</div>
+            </div>
 
         </section>
 
+        <!-- QUICK PROMPTS -->
+        <section class="quick-prompts">
 
-        <!-- ================= TYPING ================= -->
-
-        <div class="typing-container" id="typingIndicator">
-
-            <div class="typing-box">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
+            <div class="section-heading">
+                <div>
+                    <h2>What would you like to explore?</h2>
+                    <p>Select a topic or ask your own question below.</p>
+                </div>
             </div>
 
-        </div>
+            <div class="prompt-grid">
 
+                <button type="button"
+                        class="prompt-card"
+                        data-question="Summarize my business health and identify my top three priorities based on my assessment data.">
 
-        <!-- ================= COMPOSER ================= -->
+                    <span class="prompt-icon financial-icon">₹</span>
 
-        <div class="composer-wrapper">
+                    <span class="prompt-text">
+                        <strong>Business Health</strong>
+                        <small>Understand your assessment</small>
+                    </span>
 
-            <div class="composer">
+                    <span class="prompt-arrow">↗</span>
+                </button>
 
-                <textarea
-                    id="chatInput"
-                    rows="1"
-                    placeholder="Message NKP AI..."
-                    autocomplete="off"
-                ></textarea>
+                <button type="button"
+                        class="prompt-card"
+                        data-question="Explain how I can improve my financial performance using my available business data.">
 
-                <button id="sendButton" class="send-btn">
+                    <span class="prompt-icon growth-icon">↗</span>
 
-                    <span>➤</span>
+                    <span class="prompt-text">
+                        <strong>Financial Growth</strong>
+                        <small>Find improvement opportunities</small>
+                    </span>
 
+                    <span class="prompt-arrow">↗</span>
+                </button>
+
+                <button type="button"
+                        class="prompt-card"
+                        data-question="Give me a practical 30-day business improvement plan based on my assessment results.">
+
+                    <span class="prompt-icon action-icon">✓</span>
+
+                    <span class="prompt-text">
+                        <strong>Action Plan</strong>
+                        <small>Build your next steps</small>
+                    </span>
+
+                    <span class="prompt-arrow">↗</span>
                 </button>
 
             </div>
 
-            <p class="composer-note">
-                NKP AI provides business-focused guidance based on your assessment and business information.
+        </section>
+
+        <!-- CHAT PANEL -->
+        <section class="chat-container">
+
+            <div class="chat-header">
+
+                <div class="chat-heading">
+                    <div class="assistant-avatar">✦</div>
+
+                    <div>
+                        <h2>Chat with NKP AI</h2>
+                        <p>Ask a question about your business</p>
+                    </div>
+                </div>
+
+                <span class="secure-label">AI ASSISTANT</span>
+
+            </div>
+
+            <!-- JavaScript inserts chat messages here -->
+            <div id="chatMessages"
+                 class="chat-messages"
+                 role="log"
+                 aria-live="polite"
+                 aria-relevant="additions text">
+
+                <div class="message ai-message">
+                    <div class="message-label">NKP AI</div>
+
+                    <div class="message-content">
+                        Vanakkam! Welcome to NKP AI Business Insights.
+
+                        <br><br>
+
+                        I can help you understand your business assessment,
+                        identify improvement opportunities, and prepare a
+                        detailed business report.
+
+                        <br><br>
+
+                        <strong>What would you like to know about your business?</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Loading indicator -->
+            <div id="typingIndicator"
+                 class="typing-indicator"
+                 role="status"
+                 aria-live="polite"
+                 style="display:none;">
+                NKP AI is analyzing your question...
+            </div>
+
+            <!-- INPUT AREA -->
+            <form id="chatForm" class="chat-input-area">
+
+                <div class="input-wrapper">
+
+                    <textarea
+                        id="chatInput"
+                        name="message"
+                        rows="1"
+                        maxlength="4000"
+                        placeholder="Ask NKP AI about your business..."
+                        aria-label="Ask NKP AI a question"
+                        required></textarea>
+
+                    <div class="input-footer">
+                        <span>Enter to send · Shift + Enter for a new line</span>
+                        <span>NKP AI</span>
+                    </div>
+
+                </div>
+
+                <button type="submit" id="sendButton" class="send-button">
+                    <span id="sendButtonText">Send</span>
+                    <span aria-hidden="true">➤</span>
+                </button>
+
+            </form>
+
+            <p class="chat-disclaimer">
+                AI-generated guidance may require verification.
+                Review important financial and compliance decisions carefully.
             </p>
 
-        </div>
+        </section>
+
+        <footer class="page-footer">
+            <span>© 2026 Namma KanakkuPillai (NKP)</span>
+            <span>Business Health Intelligence</span>
+        </footer>
 
     </main>
 
-
-    <script src="js/ai-insights.js"></script>
+</div>
 
 </body>
-
 </html>
