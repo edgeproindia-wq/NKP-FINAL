@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const continueButton = document.getElementById("continueButton");
     const buttonText = document.getElementById("buttonText");
 
+    // Check required page elements
+    if (!form || !message || !continueButton || !buttonText) {
+        console.error("NKP Business Setup: Required HTML elements are missing.");
+        return;
+    }
+
     function showMessage(text, type) {
         message.textContent = text;
         message.className = "business-message " + type;
@@ -36,9 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         categories.forEach(function (category) {
 
-            localStorage.removeItem(
-                "nkpCategoryScore_" + category
-            );
+            localStorage.removeItem("nkpCategoryScore_" + category);
 
             localStorage.removeItem(
                 "nkpCompletedSubcategories_" + category
@@ -55,6 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event) {
 
         event.preventDefault();
+
+        // Prevent duplicate submissions
+        if (continueButton.disabled) {
+            return;
+        }
 
         const businessName =
             document.getElementById("businessName").value.trim();
@@ -80,12 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const state =
             document.getElementById("state").value.trim();
 
-        const monthlyRevenue =
-            document.getElementById("monthlyRevenue").value;
-
-        const monthlyExpenses =
-            document.getElementById("monthlyExpenses").value;
-
+        // Validate the fields that actually exist in your HTML
         if (
             !businessName ||
             !businessType ||
@@ -94,9 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
             employees === "" ||
             !street ||
             !city ||
-            !state ||
-            monthlyRevenue === "" ||
-            monthlyExpenses === ""
+            !state
         ) {
             showMessage(
                 "Please fill in all required fields.",
@@ -106,14 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (
+            !Number.isFinite(Number(yearsInBusiness)) ||
             Number(yearsInBusiness) < 0 ||
             Number(yearsInBusiness) > 100 ||
-            Number(employees) < 1 ||
-            Number(monthlyRevenue) < 0 ||
-            Number(monthlyExpenses) < 0
+            !Number.isInteger(Number(employees)) ||
+            Number(employees) < 1
         ) {
             showMessage(
-                "Please enter valid business and financial information.",
+                "Please enter valid business information.",
                 "error"
             );
             return;
@@ -128,42 +130,43 @@ document.addEventListener("DOMContentLoaded", function () {
             street: street,
             city: city,
             state: state,
-            location: [street, city, state].join(", "),
+            location: [street, city, state].join(", ")
         };
+
+        const originalButtonText = buttonText.textContent;
+
+        continueButton.disabled = true;
+        buttonText.textContent = "Saving...";
 
         try {
 
+            // Save business information
             localStorage.setItem(
                 "nkpBusiness",
                 JSON.stringify(businessData)
             );
 
+            // Start a fresh assessment only after valid details are saved
             resetAssessmentProgress();
 
-            continueButton.disabled = true;
-            buttonText.textContent = "Saving...";
-
             showMessage(
-                "Business information saved successfully!",
+                "Business information saved successfully! Opening assessment...",
                 "success"
             );
 
-            setTimeout(function () {
-                window.location.href = "categories.html";
-            }, 700);
+            window.location.href = "categories.html";
 
         } catch (error) {
 
-            console.error("Business Setup Error:", error);
+            console.error("NKP Business Setup Error:", error);
 
             continueButton.disabled = false;
-            buttonText.textContent = "Continue to Assessment";
+            buttonText.textContent = originalButtonText;
 
             showMessage(
-                "Unable to save business information. Please try again.",
+                "Unable to save information. Please check browser storage and try again.",
                 "error"
             );
-
         }
 
     });
